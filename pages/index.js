@@ -3,9 +3,8 @@ import { Layout } from "components/Layout"
 import { Newsletter } from "components/Newsletter"
 import { ResourceHighlight } from "components/ResourceHighlight"
 import { ResourceList } from "components/ResourceList"
-import { resources } from "api/data"
 
-const Home = () => {
+const Home = ({ resources }) => {
   return (
     <Layout>
       <ResourceHighlight resources={resources.slice(0, 2)} />
@@ -14,6 +13,17 @@ const Home = () => {
       <Footer />
     </Layout>
   )
+}
+
+export const getServerSideProps = async () => {
+  const resData = await fetch("http://localhost:3000/api/resources");
+  const data = await resData.json();
+
+  return {
+    props: {
+      resources: data
+    }
+  }
 }
 
 export default Home

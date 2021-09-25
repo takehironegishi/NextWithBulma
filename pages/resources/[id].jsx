@@ -24,7 +24,20 @@ const ResourceDetail = ({ resource }) => {
   )
 }
 
-export const getServerSideProps = async ({ params }) => {
+export const getStaticPaths = async () => {
+  const dataRes = await fetch("http://localhost:3001/api/resources");
+  const data = await dataRes.json();
+  const paths = data.map(resource => ({
+    params: { id: resource.id }
+  }))
+
+  return {
+    paths,
+    fallback: false
+  }
+}
+
+export const getStaticProps = async ({ params }) => {
   const dataRes = await fetch(`http://localhost:3001/api/resources/${params.id}`);
   const data = await dataRes.json();
 

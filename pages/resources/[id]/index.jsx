@@ -5,7 +5,7 @@ import axios from "axios";
 const ResourceDetail = ({ resource }) => {
   const activateResource = () => {
     axios.patch("/api/resources", {...resource, status: "active"})
-      .then(_ => alert("Resource has been activated!"))
+      .then(_ => location.reload())
       .catch(_ => alert("Cannot activate the resource!"))
   }
 

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import moment from "moment";
 import { ResourceLabel } from "components/ResourceLabel";
 
 export const ResourceHighlight = ({ resources }) => (
@@ -11,7 +12,7 @@ export const ResourceHighlight = ({ resources }) => (
 							<div className="column is-8 is-offset-2">
 								<div className="content is-medium">
 									<h2 className="subtitle is-4">
-										{resource.createdAt}
+										{moment(resource.createdAt).format("LLL")}
 										<ResourceLabel status={resource.status} />
 									</h2>
 									<h1 className="title">
